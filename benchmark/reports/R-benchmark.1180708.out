@@ -1,0 +1,13 @@
+START TIME: Sun Apr 28 19:39:51 CEST 2024
+NODES: 8
+python -u -m torch.distributed.run --nproc_per_node 4 --nnodes 8 --node_rank $SLURM_PROCID --rdzv_endpoint as03r3b20:6000 --rdzv_backend c10d --max_restarts 0 --role $(hostname -s|tr -dc '0-9'): --tee 3 /home/upc/upc580327/MN5-Distributed-PyTorch/benchmark/all_reduce_benchmark.py
+[03320:0]:1
+[03320:0]:2
+[03320:0]:3
+[03320:0]:4
+[03320:0]:5
+[03320:0]:The average bandwidth of all_reduce with a 4.0GB payload (5 trials, 32 ranks):
+[03320:0]: algbw: 42.446 GBps (339.6 Gbps)
+[03320:0]: busbw: 82.240 GBps (657.9 Gbps)
+[03320:0]:
+END TIME: Sun Apr 28 19:40:14 CEST 2024

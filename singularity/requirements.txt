@@ -1,0 +1,12 @@
+packaging
+numpy
+pandas
+numba
+transformers
+accelerate
+datasets
+evaluate
+trl
+wandb
+deepspeed==0.13.1
+deepspeed-kernels

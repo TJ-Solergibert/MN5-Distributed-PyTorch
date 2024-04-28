@@ -1,0 +1,5 @@
+START TIME: Sun Apr 28 22:55:45 CEST 2024
+python -u -m torch.distributed.run --nproc_per_node 4 --node_rank $SLURM_PROCID --max_restarts 0 --role $(hostname -s|tr -dc '0-9'): --tee 3 /home/upc/upc580327/MN5-Distributed-PyTorch/my_first_distributed_app/my_first_distributed_app.py
+[07131:0]:AVG Time: 0.11104027926921844
+[07131:0]:
+END TIME: Sun Apr 28 22:55:57 CEST 2024
