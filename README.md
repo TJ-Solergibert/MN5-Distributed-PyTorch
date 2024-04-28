@@ -47,6 +47,8 @@ salloc -q gp_debug -A bsc98 --exclusive
 module load singularity
 singularity build MN5-NGC-PyTorch-24.03.sif docker-archive:///home/upc/upc580327/MN5-Distributed-PyTorch/MN5-NGC-PyTorch-24.03.tar
 ```
+> [!TIP]
+> Use `bsc_queues` to check your account and available queues.
 ## First steps w/ Singularity
 There are 2 ways to run applications within the container:
 1. `exec`: With `exec` you'll run the specified command.
