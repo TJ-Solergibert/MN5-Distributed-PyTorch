@@ -176,11 +176,14 @@ To test everything, I've included a small script with an application that comput
 In [`benchmark/`](/benchmark/), you'll find both the code and the scripts to launch a test that measures the bandwidth between GPUs across multiple nodes. The value we are interested in is the bus bandwidth, as it reflects [how optimally the hardware is used](https://github.com/NVIDIA/nccl-tests/blob/master/doc/PERFORMANCE.md#bus-bandwidth).
 | Nodes | Bus bandwidth | Algorithm bandwidth |
 |:-----:|:-------------:|:-------------------:|
-|   1   |     2628.8    |        1752.5       |
-|   2   |     1230.8    |        703.3        |
-|   4   |     656.0     |        349.9        |
-|   8   |     657.9     |        339.6        |
-|   16  |     660.4     |        335.4        |
+|   1   |     2512.1    |        1674.7       |
+|   2   |     1192.2    |        681.2        |
+|   4   |     655.7     |        349.7        |
+|   8   |     658.3     |        339.8        |
+|   16  |      662      |        336.3        |
+|   32  |     663.8     |        334.5        |
+|   64  |     660.3     |        331.5        |
+|  128  |     633.6     |        317.4        |
 
 ## Other resources
 - [BSC MareNostrum5 User Guide](https://www.bsc.es/supportkc/docs/MareNostrum5/intro)

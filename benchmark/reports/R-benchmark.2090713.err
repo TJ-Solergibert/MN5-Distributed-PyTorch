@@ -1,0 +1,169 @@
++ module purge
++ local __lmod_my_status
++ local __lmod_sh_dbg
++ '[' -z '' ']'
++ case "$-" in
++ __lmod_sh_dbg=x
++ '[' -n x ']'
++ set +x
+Shell debugging temporarily silenced: export LMOD_SH_DBG_ON=1 for Lmod's output
+unload bsc/1.0 (PATH, MANPATH)
+Shell debugging restarted
++ return 0
++ module load singularity
++ local __lmod_my_status
++ local __lmod_sh_dbg
++ '[' -z '' ']'
++ case "$-" in
++ __lmod_sh_dbg=x
++ '[' -n x ']'
++ set +x
+Shell debugging temporarily silenced: export LMOD_SH_DBG_ON=1 for Lmod's output
+load SINGULARITY/3.11.5 (PATH)
+Shell debugging restarted
++ return 0
++ GPUS_PER_NODE=4
++ echo 'NODES: 32'
+++ head -n 1
+++ scontrol show hostnames 'as07r2b[17-32],as07r3b[17-32]'
++ MASTER_ADDR=as07r2b17
++ MASTER_PORT=6000
++ LAUNCHER='torchrun     --nproc_per_node 4     --nnodes 32     --node_rank $SLURM_PROCID     --rdzv_endpoint as07r2b17:6000     --rdzv_backend c10d     --max_restarts 0     --tee 3     '
++ PYTHON_FILE=/home/upc/upc580327/MN5-Distributed-PyTorch/benchmark/all_reduce_benchmark.py
++ export 'CMD=torchrun     --nproc_per_node 4     --nnodes 32     --node_rank $SLURM_PROCID     --rdzv_endpoint as07r2b17:6000     --rdzv_backend c10d     --max_restarts 0     --tee 3      /home/upc/upc580327/MN5-Distributed-PyTorch/benchmark/all_reduce_benchmark.py'
++ CMD='torchrun     --nproc_per_node 4     --nnodes 32     --node_rank $SLURM_PROCID     --rdzv_endpoint as07r2b17:6000     --rdzv_backend c10d     --max_restarts 0     --tee 3      /home/upc/upc580327/MN5-Distributed-PyTorch/benchmark/all_reduce_benchmark.py'
++ echo torchrun --nproc_per_node 4 --nnodes 32 --node_rank '$SLURM_PROCID' --rdzv_endpoint as07r2b17:6000 --rdzv_backend c10d --max_restarts 0 --tee 3 /home/upc/upc580327/MN5-Distributed-PyTorch/benchmark/all_reduce_benchmark.py
++ SRUN_ARGS='     --cpus-per-task 80     --jobid 2090713     --wait 60     '
++ SINGULARITY_CONTAINER=/gpfs/projects/bsc98/upc580327/singularity/MN5-NGC-PyTorch-24.04.sif
++ SINGULARITY_ARGS='     --bind /home/upc/upc580327/MN5-Distributed-PyTorch     /gpfs/projects/bsc98/upc580327/singularity/MN5-NGC-PyTorch-24.04.sif     '
++ srun --cpus-per-task 80 --jobid 2090713 --wait 60 singularity exec --nv --bind /home/upc/upc580327/MN5-Distributed-PyTorch /gpfs/projects/bsc98/upc580327/singularity/MN5-NGC-PyTorch-24.04.sif bash -c 'torchrun     --nproc_per_node 4     --nnodes 32     --node_rank $SLURM_PROCID     --rdzv_endpoint as07r2b17:6000     --rdzv_backend c10d     --max_restarts 0     --tee 3      /home/upc/upc580327/MN5-Distributed-PyTorch/benchmark/all_reduce_benchmark.py'
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+15:4: not a valid test operator:  
+15:4: not a valid test operator: 12.4
+21:4: not a valid test operator: (
+21:4: not a valid test operator: 535.86.10
+++ date
++ echo 'END TIME: Wed May 22 03:53:04 PM CEST 2024'
