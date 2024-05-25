@@ -1,99 +1,59 @@
 <h1 align="center">
-<p> MareNostrum5 Distributed PyTorch Hands-On 
+<p> ?Alps? Distributed PyTorch Hands-On 
 </h1>
 
 - [Introduction](#introduction)
-- [Singularity containers](#singularity-containers)
-  - [NGC Registry](#ngc-registry)
-  - [Building Docker image](#building-docker-image)
-  - [Building Singularity container](#building-singularity-container)
-- [First steps w/ Singularity](#first-steps-w-singularity)
-    - [BSC Singularity](#bsc-singularity)
+- [**?Creating a new Image/Container??**](#creating-a-new-imagecontainer)
+- [First steps w/ ?**Singularity?**](#first-steps-w-singularity)
+  - [FileSystems](#filesystems)
 - [Slurm](#slurm)
-  - [Interactive session w/ Singularity](#interactive-session-w-singularity)
+  - [Interactive session w/ **?Singularity?**](#interactive-session-w-singularity)
   - [Batched execution w/ Singularity](#batched-execution-w-singularity)
+  - [Slurm Queues](#slurm-queues)
   - [Utilitites](#utilitites)
 - [torchrun](#torchrun)
-- [First distributed application with Singularity](#first-distributed-application-with-singularity)
-- [NCCL network benchmark](#nccl-network-benchmark)
+  - [NCCL network benchmark](#nccl-network-benchmark)
 - [Other resources](#other-resources)
 
 
 ## Introduction
-This repository serves as an entry point for developing distributed applications with PyTorch on MareNostrum5 using Singularity containers.
-## Singularity containers
-### NGC Registry
-The [NGC Registry](https://catalog.ngc.nvidia.com/containers) contains Docker images packed with nearly everything you can need for running applications with NVIDIA GPUs. We will use the [PyTorch](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch) images which include all the PyTorch stack and then we will install additional dependencies. I recommend start developing from this images rather than trying to build a image from scratch (Installing CUDA drivers, NCCL, etc.)
-### Building Docker image
-In [`singularity/Dockerfile`](singularity/Dockerfile) you'll find a very simple Dockerfile to build a custom image from the NGC PyTorch container. We just simply copy this repository inside the `/workspace` directory of the image and install some extra dependencies. To build our custom image just run:
-```sh
-docker build -t mn5 -f singularity/Dockerfile .
-```
-The `-t` flag is the pseudonim for the builded image and `-f` to specify the path to the `Dockerfile`. Some useful flags are `--progress=plain` for a verbose installation (For debugging errors) and  `--no-cache` to perform the building process rebuilding all layers. You can check inside the container running the following:
-```
-docker run --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 -it --rm mn5 bash
-```
-### Building Singularity container
-> [!TIP]
-> Singularity is available from MN5 General purpose and accelerated partition. Remember to load the module `module load singularity`
-To build the Singularity container, we will need to compress the Docker image into a tar file and then copy it to MN5.
-"
-```
-docker save docker_img_ID -o MN5-NGC-PyTorch-24.03.tar 
-```
-Then, we will request an interactive session on MN5 in the general purpose partition to create the container from the tar file as follows:
-```
-salloc -q gp_debug -A bsc98 --exclusive
-module load singularity
-singularity build MN5-NGC-PyTorch-24.03.sif docker-archive:///home/upc/upc580327/MN5-Distributed-PyTorch/MN5-NGC-PyTorch-24.03.tar
-```
-> [!TIP]
-> Use `bsc_queues` to check your account and available queues.
-## First steps w/ Singularity
+This repository serves as an entry point for developing distributed applications with PyTorch on **?Alps?** using **?Singularity containers?**.
+
+## **?Creating a new Image/Container??**
+?**In this section we'll go across all the necessary steps to create a new image for..........?**
+
+## First steps w/ ?**Singularity?**
+**I don't know exactly the details, but I think that we hace a toml file with the configs right? In this section we explain how to launch the jobs with the images, bind pathes, use gpus, aws plugin, etc**
 There are 2 ways to run applications within the container:
-1. `exec`: With `exec` you'll run the specified command.
-  ```
-  singularity exec --nv MN5-NGC-PyTorch-24.03.sif 'nvidia-smi'
-  ```
-2. `shell`: With `shell` you'll run a shell inside the container:
-  ```
-  singularity shell --nv MN5-NGC-PyTorch-24.03.sif
-  ```
+1. ......
+2. ......
+3. ......
 
-> [!NOTE]
-> To attach GPUs to the container add the `--nv` flag to your singularity call: `singularity shell --nv MN5-NGC-PyTorch-24.03.sif`
+Also important:
+- **?How to bind paths?**
+- **?How to Use the gpus?**
+- **?The aws performance plugin?**
 
-It is possible to bind paths inside the container with the `--bind` flag.
-```
-singularity shell --nv --bind /home/upc/upc580327/MN5-Distributed-PyTorch MN5-NGC-PyTorch-24.03.sif
-```
-#### BSC Singularity
-> [!CAUTION]
-> As of writing this doc, `bsc_singularity` is not available from UPC accounts. 
-BSC offers a simple wrapper that allows users to list the images built by the support team called `bsc_singularity`. To list the available containers run:
-```
-bsc_singularity ls
-  <container_1>
-  <container_2>
-  <container_3>
-```
-To use this containers you just have to switch your calls from `singularity` to `bsc_singularity`:
-```
-bsc_singularity exec <options> <container_X> <command>
-bsc_singularity shell <options> <container_X>
-```
-Additionally, there's an option to print an information file that contains basic information about the container. But it may not be available for all of them.
-```
-bsc_singularity info <container_X>
-```
+### FileSystems
+Which are the different filesystems in the cluster and how we should use them. (((Is there any folder shared among the group???)))
+
+
 ## Slurm
-### Interactive session w/ Singularity
+### Interactive session w/ **?Singularity?**
 For developing, interactive sessions is the way to go. You'll get a shell with the specified requirements you asked for. From this allocated hardware you'll be able to test your code and also run a container. To get a shell inside a singularity container run:
 ```
-salloc -q acc_debug --account bsc98 --gres=gpu:2 --cpus-per-task 40 bash -c 'module load singularity && singularity shell --nv --bind /home/upc/upc580327/MN5-Distributed-PyTorch MN5-NGC-PyTorch-24.03.sif'
+salloc -q acc_debug --account bsc98 --gres=gpu:2 --cpus-per-task 40 bash -c 'module load singularity && singularity shell --nv --bind /home/upc/upc580327/MN5-Distributed-PyTorch MN5-NGC-PyTorch-24.03.sif' **?Change this line!!! Leave a single line command to launch a shell inside a container!!?**
 ```
 ### Batched execution w/ Singularity
-To submit jobs, we will use `sbatch` to send the job to a queue along with the compute requirements, and it will execute once they are available. You can check the available queues running `bsc_queues`. The script we will submit with sbatch will have a structure similar to the following snippet:
+To submit jobs, we will use `sbatch` to send the job to a queue along with the compute requirements, and it will execute once they are available. You can check the available queues running `bsc_queues` (**?Is there a similar command in alps?**). The script we will submit with `sbatch` will have a structure similar to the following snippet:
+
+**?Change the flags to the required by alps. It's true that with sbatch you can also run sbatch --nodes XX script.sh to set the value of the slurm variables, but let's emphasize on launching jobs with sbatch script.sh and include ALL flags inside the header of the script. ?**
+
+**?With Alejandro we saw that there is a slum flag named #SBATCH --contigous that schedules multinode jobs with nodes close together. This is important for performance, but we experienced a limit in this flag (You could not ask for more than 32 contigous nodes I think). Check with the alps or in the docs if there is something about this flag!?**
+
+
+
+**?Also include other relevant settings apart from the slurm flags, like environment variables for nccl if it's necessary (Ask the systems admins)?**
 ```
 #!/bin/bash
 
@@ -126,8 +86,14 @@ Comments about each setting:
 
 Remember that it is necessary to specify the `--cpus-per-task` quantity in `srun`. We recommend using the Slurm environment variable `$SLURM_CPUS_PER_TASK`.
 
-In [`/my_first_distributed_app/submit_my_first_distributed_app.sh`](/my_first_distributed_app/submit_my_first_distributed_app.sh), you will find an example script for launching jobs on a **single node**, and in [`/benchmark/submit_benchmark.sh`](/benchmark/submit_benchmark.sh), you will find a script for launching jobs on **multiple nodes**.
+> [!WARNING]
+> Remember to always include `srun` in the `sbatch` script for the command launching `torchrun`.
+
+### Slurm Queues
+If there are multiple slurm queues, how are they used, time limits, etc. (((Usually there is a debugging queue, let's emphasize on a responsible use of it)))
+
 ### Utilitites
+**?Check that all work in Alps and if there are different ones?**
 - Display all submitted jobs (from all your current accounts/projects):
   ```
   squeue
@@ -143,7 +109,7 @@ In [`/my_first_distributed_app/submit_my_first_distributed_app.sh`](/my_first_di
 ## torchrun
 We will use `torchrun` to run distributed applications with PyTorch. In short, `torchrun` will be in charge of:
 1. Spawn `--nproc_per_node` processes in each node running the `python_script.py` file
-2. Init the communications between ALL the processes
+2. Do a rendezvous between ALL the processes
 3. Set the `WORLD_SIZE` and `RANK` environment variables in each process
 ```
 LAUNCHER="torchrun \
@@ -167,12 +133,10 @@ Comments about each setting:
   ```
 - `--rdzv_backend`: Use the `c10d` backend.
 - `--tee`: Set to `3` to redirect both stdout+stderr for all workers.
-## First distributed application with Singularity
-To test everything, I've included a small script with an application that computes PI using the trapezoid method. For this, it will divide the integral calculation among four processes and aggregate the result. The script `my_first_distributed_app/my_first_distributed_app.sh` submits the job to the accelerated partition queue and stores the output in `my_first_distributed_app/reports/`.
 
-> [!NOTE]
-> In this example, for aggregating the result we use the `gloo` backend, designed for CPU <-> CPU communications. For applications that require the use of GPUs, the `nccl` backend will be used
-## NCCL network benchmark
+This is all you need to launch multinode jobs with PyTorch in Alps. In [`submit_multinode.sh`](/slurm/submit_multinode.sh) you will find a template that includes the most important configurations. Feel free to contact ... or check slack ... for issues!
+
+### NCCL network benchmark
 In [`benchmark/`](/benchmark/), you'll find both the code and the scripts to launch a test that measures the bandwidth between GPUs across multiple nodes. The value we are interested in is the bus bandwidth, as it reflects [how optimally the hardware is used](https://github.com/NVIDIA/nccl-tests/blob/master/doc/PERFORMANCE.md#bus-bandwidth).
 | Nodes | Bus bandwidth | Algorithm bandwidth |
 |:-----:|:-------------:|:-------------------:|
@@ -186,5 +150,5 @@ In [`benchmark/`](/benchmark/), you'll find both the code and the scripts to lau
 |  128  |     633.6     |        317.4        |
 
 ## Other resources
-- [BSC MareNostrum5 User Guide](https://www.bsc.es/supportkc/docs/MareNostrum5/intro)
-- [BSC Singularity User Guide](https://www.bsc.es/supportkc/docs-utilities/singularity)
+- Alps User Guide
+- Contacts, etc.

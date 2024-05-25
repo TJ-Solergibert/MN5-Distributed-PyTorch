@@ -77,7 +77,7 @@ import socket
 import torch
 import torch.distributed as dist
 
-TRIALS = 5
+TRIALS = 20
 
 # these emulate the payload which will become a M * N * 4-sized tensor below
 N = 500000

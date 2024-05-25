@@ -1,3 +1,14 @@
+
+Change all of this for the alps but mantains structure of
+1. Printing the start time & sets
+2. Setting environment & Network
+3. Set the launcher of the python job
+4. srun the launcher
+5. print end time
+
+The main difference with alps will be the singulairty and module loads calls!!
+
+
 #!/bin/bash
 
 #SBATCH --job-name multinode

@@ -1,3 +1,19 @@
+
+This is very similar to the multinode one, we could just delete this example of multigpu and run the 
+1 node jobs with the multinode torchrun launcher. ((It will work the same way, but there are more flags
+in the torchrun call))
+
+
+Change all of this for the alps but mantains structure of
+1. Printing the start time & sets
+2. Setting environment & Network
+3. Set the launcher of the python job
+4. srun the launcher
+5. print end time
+
+The main difference with alps will be the singulairty and module loads calls!!
+
+
 #!/bin/bash
 
 #SBATCH --job-name multigpu
